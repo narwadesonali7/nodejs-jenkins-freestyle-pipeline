@@ -67,46 +67,142 @@ We will create three Jenkins freestyle jobs to automate the deployment pipeline:
 
 02-node-install-job: Install Node.js dependencies (npm install).
 
-![ubuntu](imgs/02-node-install-job-new-item-6.png)
-
 03-node-deploy-job: Deploy/start the Node.js application using PM2.
 
-![ubuntu](imgs/03-node-deploy-job-10.png)
 Project 1: 01-node-pull-job
 
 ---
 ### Open Jenkins web interface.
 
-Click New Item.
+- Click New Item.
 
-Enter name: 01-node-pull-job.
+- Enter name: 01-node-pull-job.
 
-Choose Freestyle project, click OK.
+- Choose Freestyle project, click OK.
 
 ![ubuntu](imgs/node-pull-job-1.png)
 
-Scroll to Source Code Management, select Git.
+- Scroll to Source Code Management, select Git.
 
 ![ubuntu](imgs/select-git-repo-2.png)
 
 ![ubuntu](imgs/branch-main-3.png)
 
-Enter your Git repository URL, e.g.:
+- Enter your Git repository URL, e.g.:
 https://github.com/iamtruptimane/node-js-app-CICD.git
 
-Under Build Triggers, optionally configure how and when to trigger builds.
+- Under Build Triggers, optionally configure how and when to trigger builds.
 
-Scroll to Post-build Actions.
+- Scroll to Post-build Actions.
 
-Select Build other projects.
+- Select Build other projects.
+
 ![ubuntu](imgs/build-other-project-4.png)
 
-Enter 02-node-install-job as the downstream job.
+- Enter 02-node-install-job as the downstream job.
 
 
 ![ubuntu](imgs/projects-to-build-5.png)
 
-Click Save.
+- Click Save.
 
+### Project 2: 02-node-install-job
+Create a new freestyle project named 02-node-install-job.
 
+Click OK.
 
+![ubuntu](imgs/02-node-install-job-new-item-6.png)
+
+Add a Build Step → Execute Shell.
+
+![ubuntu](imgs/add-build-steps-7.png)
+
+Enter the shell script
+```
+cd /var/lib/jenkins/workspace/01-node-pull-job
+sudo npm install
+```
+Explanation: This moves to the workspace where the code was pulled and installs all dependencies listed in package.json.
+
+- Scroll to Post-build Actions.
+- Select Build other projects.
+
+- Enter 03-node-deploy-job.
+
+- Click Save.
+
+![ubuntu](imgs/execute-shell-8.png)
+
+---
+## Project 3: 03-node-deploy-job
+Create a new freestyle project named 03-node-deploy-job.
+
+Click OK.
+![ubuntu](imgs/03-node-deploy-job-10.png)
+
+Add a Build Step → Execute Shell.
+
+![ubuntu](imgs//execute-shell-13.png)
+Enter the shell script:
+
+```
+cd /var/lib/jenkins/workspace/02-node-install-job
+sudo pm2 start app.js || pm2 restart app.js
+```
+Explanation: This navigates to the workspace and starts the Node.js app using PM2. If it’s already running, it restarts it to reflect the new code.
+- Click Save.
+
+---
+### Running the Pipeline
+- Go to Jenkins dashboard.
+
+- Click on 01-node-pull-job.
+
+- Click Build Now.
+
+- This will trigger the downstream jobs in order:
+
+- 01-node-pull-job (pull code),
+
+- then 02-node-install-job (install dependencies),
+
+- then 03-node-deploy-job (deploy app).
+
+---
+### Open Your Application Port
+Make sure port 3000 (or the port your Node.js app listens on) is open in your server’s firewall or cloud security group:
+
+- For AWS Security Group:
+
+- Type: Custom TCP
+
+- Port Range: 3000
+
+- Source: Anywhere (0.0.0.0/0) or your IP range
+
+---
+### Access the Application
+Open your browser and go to:
+```
+http:http://3.95.238.208:3000/
+
+```
+You should see your Node.js application running!
+
+- Jenkins acts as the orchestrator, running the pipeline jobs.
+
+- The GitHub repo hosts your Node.js application code.
+
+- PM2 ensures your app runs continuously and restarts on failure.
+
+- The application is accessible externally on port 3000.
+
+---
+### Conclusion
+By setting up Node.js deployment on Jenkins using freestyle projects, you’ve built a simple yet effective CI/CD pipeline that automates pulling code from a repository, installing dependencies, and deploying the application with PM2.
+
+This approach not only saves time but also reduces human errors, ensuring your application is always up-to-date and running smoothly. While freestyle projects are great for getting started, you can later upgrade to Jenkins Pipeline as Code for more flexibility, scalability, and better maintainability.
+
+With the right automation in place, you can focus more on building features and less on managing deployments — turning ideas into running applications faster than ever! 
+
+---
