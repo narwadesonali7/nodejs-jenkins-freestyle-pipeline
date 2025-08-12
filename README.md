@@ -36,28 +36,29 @@ Automating your Node.js application deployment with Jenkins helps you deliver up
 ---
 ### System Setup: Installing Node.js and PM2 for Jenkins User
 #### 1. Switch to the Jenkins User
-Jenkins jobs run under the jenkins user account. You need to install Node.js and PM2 as this user:
+Jenkins jobs run under the jenkins user account.
+- You need to install Node.js and PM2 as this user:
 ```
 sudo su - jenkins
 ```
 #### 2. Update Package Lists
-Always start by updating your package lists:
+- Always start by updating your package lists:
 ```
 sudo apt update
 ```
 ### 3. Add Node.js LTS Repository
-Add the Node.js LTS repository maintained by NodeSource:
+- Add the Node.js LTS repository maintained by NodeSource:
 ```
 sudo curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
 ```
 ### 4. Install Node.js
-Install Node.js and npm from the added repository:
+- Install Node.js and npm from the added repository:
 ```
 sudo apt-get update
 sudo apt install -y nodejs
 ```
 ### 5. Verify Node.js and npm Installation
-Check versions to confirm successful installation:
+- Check versions to confirm successful installation:
 ```
 node -v
 npm -v
@@ -67,7 +68,7 @@ PM2 is a process manager to keep your Node.js app running and manage restarts:
 ```
 sudo npm install -g pm2
 ```
-Verify PM2 installation:
+- Verify PM2 installation:
 ```
 pm2 -v
 
@@ -123,15 +124,15 @@ https://github.com/iamtruptimane/node-js-app-CICD.git
 ### Project 2: 02-node-install-job
 Create a new freestyle project named 02-node-install-job.
 
-Click OK.
+- Click OK.
 
 ![ubuntu](imgs/02-node-install-job-new-item-6.png)
 
-Add a Build Step → Execute Shell.
+- Add a Build Step → Execute Shell.
 
 ![ubuntu](imgs/add-build-steps-7.png)
 
-Enter the shell script
+- Enter the shell script
 ```
 cd /var/lib/jenkins/workspace/01-node-pull-job
 sudo npm install
@@ -149,15 +150,15 @@ Explanation: This moves to the workspace where the code was pulled and installs 
 
 ---
 ## Project 3: 03-node-deploy-job
-Create a new freestyle project named 03-node-deploy-job.
+- Create a new freestyle project named 03-node-deploy-job.
 
-Click OK.
+- Click OK.
 ![ubuntu](imgs/03-node-deploy-job-10.png)
 
-Add a Build Step → Execute Shell.
+- Add a Build Step → Execute Shell.
 
 ![ubuntu](imgs//execute-shell-13.png)
-Enter the shell script:
+- Enter the shell script:
 
 ```
 cd /var/lib/jenkins/workspace/02-node-install-job
