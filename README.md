@@ -56,7 +56,57 @@ sudo npm install -g pm2
 Verify PM2 installation:
 ```
 pm2 -v
+
 ```
+---
+
+### Setting Up Jenkins Freestyle Projects
+We will create three Jenkins freestyle jobs to automate the deployment pipeline:
+
+01-node-pull-job: Pull latest source code from Git.
+
+02-node-install-job: Install Node.js dependencies (npm install).
+
+![ubuntu](imgs/02-node-install-job-new-item-6.png)
+
+03-node-deploy-job: Deploy/start the Node.js application using PM2.
+
+![ubuntu](imgs/03-node-deploy-job-10.png)
+Project 1: 01-node-pull-job
+
+---
+### Open Jenkins web interface.
+
+Click New Item.
+
+Enter name: 01-node-pull-job.
+
+Choose Freestyle project, click OK.
+
+![ubuntu](imgs/node-pull-job-1.png)
+
+Scroll to Source Code Management, select Git.
+
+![ubuntu](imgs/select-git-repo-2.png)
+
+![ubuntu](imgs/branch-main-3.png)
+
+Enter your Git repository URL, e.g.:
+https://github.com/iamtruptimane/node-js-app-CICD.git
+
+Under Build Triggers, optionally configure how and when to trigger builds.
+
+Scroll to Post-build Actions.
+
+Select Build other projects.
+![ubuntu](imgs/build-other-project-4.png)
+
+Enter 02-node-install-job as the downstream job.
+
+
+![ubuntu](imgs/projects-to-build-5.png)
+
+Click Save.
 
 
 
