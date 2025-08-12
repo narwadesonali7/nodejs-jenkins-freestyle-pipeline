@@ -1,6 +1,6 @@
 
 # 🚀Complete Guide: Node.js Deployment on Jenkins Using Freestyle Projects 
-## Complete Guide: Node.js Deployment on Jenkins Using Freestyle Projects
+
 Automating your Node.js application deployment with Jenkins helps you deliver updates quickly, reliably, and consistently. This tutorial will walk you through setting up Jenkins freestyle projects to pull your code from GitHub, install dependencies, and deploy your Node.js app using PM2.
 
 ---
@@ -18,6 +18,19 @@ Automating your Node.js application deployment with Jenkins helps you deliver up
 - Open Jenkins web UI port (default 8080) accessible via your firewall/security groups.
 
 - Open your Node.js application port (e.g., 3000) in firewall/security group to allow external access.
+
+---
+## Architecture Diagram 
+
+![ubuntu](imgs/architecture.png)
+- Jenkins acts as the orchestrator, running the pipeline jobs.
+
+- The GitHub repo hosts your Node.js application code.
+
+- PM2 ensures your app runs continuously and restarts on failure.
+
+- The application is accessible externally on port 3000.
+
 
 ---
 ### System Setup: Installing Node.js and PM2 for Jenkins User
@@ -189,13 +202,7 @@ http:http://3.95.238.208:3000/
 ```
 You should see your Node.js application running!
 
-- Jenkins acts as the orchestrator, running the pipeline jobs.
-
-- The GitHub repo hosts your Node.js application code.
-
-- PM2 ensures your app runs continuously and restarts on failure.
-
-- The application is accessible externally on port 3000.
+![ubuntu](imgs/final-output.png)
 
 ---
 ### Conclusion
