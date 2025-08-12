@@ -42,6 +42,21 @@ Install Node.js and npm from the added repository:
 sudo apt-get update
 sudo apt install -y nodejs
 ```
+### 5. Verify Node.js and npm Installation
+Check versions to confirm successful installation:
+```
+node -v
+npm -v
+```
+### 6. Install PM2 Globally
+PM2 is a process manager to keep your Node.js app running and manage restarts:
+```
+sudo npm install -g pm2
+```
+Verify PM2 installation:
+```
+pm2 -v
+```
 
 
 
