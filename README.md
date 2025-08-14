@@ -37,6 +37,7 @@ Automating your Node.js application deployment with Jenkins helps you deliver up
 ### System Setup: Installing Node.js and PM2 for Jenkins User
 #### 1. Switch to the Jenkins User
 Jenkins jobs run under the jenkins user account.
+
 - You need to install Node.js and PM2 as this user:
 ```
 sudo su - jenkins
