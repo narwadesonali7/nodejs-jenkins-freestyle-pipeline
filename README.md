@@ -153,6 +153,7 @@ Explanation: This moves to the workspace where the code was pulled and installs 
 
 ---
 ## Project 3: 03-node-deploy-job
+
 - Create a new freestyle project named 03-node-deploy-job.
 
 - Click OK.
