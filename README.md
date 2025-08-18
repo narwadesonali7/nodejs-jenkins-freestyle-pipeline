@@ -166,9 +166,11 @@ Explanation: This moves to the workspace where the code was pulled and installs 
 
 ```
 cd /var/lib/jenkins/workspace/02-node-install-job
+
 sudo pm2 start app.js || pm2 restart app.js
 ```
-Explanation: This navigates to the workspace and starts the Node.js app using PM2. If it’s already running, it restarts it to reflect the new code.
+Explanation: This navigates to the workspace and starts the Node.js app using PM2. 
+If it’s already running, it restarts it to reflect the new code.
 
 - Click Save.
 
