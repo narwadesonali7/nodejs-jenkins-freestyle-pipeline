@@ -19,6 +19,7 @@ Automating your Node.js application deployment with Jenkins helps you deliver up
 
 ---
 ## Prerequisites
+
 - Before you start, make sure you have the following in place:
 
 - A Linux server (Ubuntu/Debian recommended) with Jenkins installed and running. Jenkins runs as a dedicated user (jenkins).
