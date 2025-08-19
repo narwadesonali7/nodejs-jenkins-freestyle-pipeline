@@ -157,6 +157,7 @@ Explanation: This moves to the workspace where the code was pulled and installs 
 - Create a new freestyle project named 03-node-deploy-job.
 
 - Click OK.
+
 ![ubuntu](imgs/03-node-deploy-job-10.png)
 
 - Add a Build Step → Execute Shell.
